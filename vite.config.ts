@@ -4,7 +4,9 @@ import react from '@vitejs/plugin-react'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: './', // 关键配置：使用相对路径，适配 GitHub Pages 的子目录部署
+  // GitHub Pages 部署关键配置
+  // 必须与你的仓库名称一致，开头和结尾都要有斜杠
+  base: '/NanoPixel-3D/', 
   build: {
     outDir: 'dist',
     assetsDir: 'assets',

@@ -8,7 +8,10 @@ const GAP = 60; // Spacing between images in 3D space
 const loadImage = (src: string): Promise<HTMLImageElement> => {
   return new Promise((resolve, reject) => {
     const img = new Image();
-    img.crossOrigin = "Anonymous";
+    // Only apply crossOrigin to http/https URLs to avoid issues with local base64 data
+    if (src.startsWith('http')) {
+      img.crossOrigin = "Anonymous";
+    }
     img.onload = () => resolve(img);
     img.onerror = (err) => reject(new Error(`Failed to load image: ${src}`));
     img.src = src;
@@ -112,8 +115,8 @@ export const processImagesToParticles = async (
           if (i + 3 >= imageData.length) continue;
 
           const a = imageData[i + 3];
-          // Skip transparent pixels
-          if (a < 20) continue;
+          // Skip transparent pixels (threshold set to 10 to be safe)
+          if (a < 10) continue;
 
           const r = imageData[i] / 255;
           const g = imageData[i + 1] / 255;
