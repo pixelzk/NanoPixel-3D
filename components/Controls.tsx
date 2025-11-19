@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { ParticleConfig, ParticleShape, Language } from '../types';
 import { translations } from '../utils/translations';
-import { Upload, Settings, Zap, ChevronLeft, Circle, Square, Diamond, Camera, Command, Globe, Download, FileBox } from 'lucide-react';
+import { Upload, Settings, Zap, ChevronLeft, Circle, Square, Diamond, Camera, Command, Globe, Download, FileBox, Eraser } from 'lucide-react';
 
 interface ControlsProps {
   config: ParticleConfig;
@@ -281,6 +281,26 @@ const Controls: React.FC<ControlsProps> = ({
                 value={config.depth}
                 onChange={(e) => updateConfig('depth', parseFloat(e.target.value))}
                 className="w-full h-1 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-orange-500"
+              />
+            </div>
+
+            {/* Transparency Threshold (Cutout) */}
+            <div className="space-y-1">
+              <div className="flex justify-between text-[10px] text-gray-400">
+                <div className="flex items-center gap-1">
+                   <Eraser size={10} />
+                   <span>{t.geometry.threshold}</span>
+                </div>
+                <span className="text-red-400">{config.threshold}</span>
+              </div>
+              <input
+                type="range"
+                min="0"
+                max="255"
+                step="1"
+                value={config.threshold}
+                onChange={(e) => updateConfig('threshold', parseFloat(e.target.value))}
+                className="w-full h-1 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-red-500"
               />
             </div>
           </div>

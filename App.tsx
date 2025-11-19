@@ -18,7 +18,8 @@ const App: React.FC = () => {
     saturation: 1.2,
     shape: 'circle',
     focus: 0.0,      
-    aperture: 3.0    
+    aperture: 3.0,
+    threshold: 20 // Default threshold for transparency
   });
 
   const [particleData, setParticleData] = useState<ProcessedData | null>(null);
@@ -37,7 +38,13 @@ const App: React.FC = () => {
   const handleProcessImages = useCallback(async (srcs: string[], cfg: ParticleConfig) => {
     setIsProcessing(true);
     try {
-      const data = await processImagesToParticles(srcs, cfg.density, cfg.depth, cfg.saturation);
+      const data = await processImagesToParticles(
+        srcs, 
+        cfg.density, 
+        cfg.depth, 
+        cfg.saturation,
+        cfg.threshold
+      );
       setParticleData(data);
     } catch (error) {
       console.error("Failed to process images:", error);
@@ -54,7 +61,7 @@ const App: React.FC = () => {
     }, 300); 
 
     return () => clearTimeout(timer);
-  }, [currentImages, config.density, config.depth, config.saturation, handleProcessImages]);
+  }, [currentImages, config.density, config.depth, config.saturation, config.threshold, handleProcessImages]);
 
   const handleUpload = (files: File[]) => {
     Promise.all(

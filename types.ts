@@ -11,6 +11,7 @@ export interface ParticleConfig {
   shape: ParticleShape; // New: Particle shape
   focus: number; // New: Depth of field focus distance
   aperture: number; // New: Depth of field blur strength
+  threshold: number; // New: Alpha threshold for transparency
 }
 
 export interface ProcessedData {

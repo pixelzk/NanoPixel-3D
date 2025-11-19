@@ -9,7 +9,7 @@ export const translations = {
     collapse: "收起面板 (快捷键: N)",
     upload: {
       title: "上传图片",
-      desc: "点击选择或拖拽图片至此",
+      desc: "点击选择或拖拽图片至此 (支持透明PNG)",
       processing: "矩阵计算中..."
     },
     shape: {
@@ -27,7 +27,8 @@ export const translations = {
       title: "几何参数",
       density: "采样密度 (越小越密)",
       size: "粒子大小",
-      depth: "Z轴挤出深度"
+      depth: "Z轴挤出深度",
+      threshold: "透明度过滤 (去除背景)"
     },
     export: {
       title: "导出与保存",
@@ -59,7 +60,7 @@ export const translations = {
     collapse: "Collapse Panel (Shortcut: N)",
     upload: {
       title: "Upload Images",
-      desc: "Click or Drag & Drop Images",
+      desc: "Click or Drag & Drop (Supports PNG)",
       processing: "Processing Matrix..."
     },
     shape: {
@@ -77,7 +78,8 @@ export const translations = {
       title: "Geometry",
       density: "Density (Lower is denser)",
       size: "Particle Size",
-      depth: "Z-Depth Extrusion"
+      depth: "Z-Depth Extrusion",
+      threshold: "Alpha Threshold (Cutout)"
     },
     export: {
       title: "Export",

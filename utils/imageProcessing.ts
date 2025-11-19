@@ -22,7 +22,8 @@ export const processImagesToParticles = async (
   imageSrcs: string[],
   step: number = 4, // Process every Nth pixel
   depthMultiplier: number = 50,
-  saturation: number = 1.0
+  saturation: number = 1.0,
+  threshold: number = 20 // Alpha threshold for transparency
 ): Promise<ProcessedData> => {
   try {
     if (!imageSrcs || imageSrcs.length === 0) {
@@ -98,6 +99,7 @@ export const processImagesToParticles = async (
       canvas.width = meta.width;
       canvas.height = meta.height;
       
+      // Clear with transparent black to ensure clean slate for PNGs
       ctx.clearRect(0, 0, meta.width, meta.height);
       ctx.drawImage(meta.img, 0, 0, meta.width, meta.height);
       
@@ -115,8 +117,10 @@ export const processImagesToParticles = async (
           if (i + 3 >= imageData.length) continue;
 
           const a = imageData[i + 3];
-          // Skip transparent pixels (threshold set to 10 to be safe)
-          if (a < 10) continue;
+          
+          // Dynamic threshold check for transparency
+          // This allows removing semi-transparent background noise or halos
+          if (a < threshold) continue;
 
           const r = imageData[i] / 255;
           const g = imageData[i + 1] / 255;
